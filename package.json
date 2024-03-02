@@ -1,0 +1,32 @@
+{
+  "name": "@cosmcaptain/cosmjs-wallet-kit",
+  "version": "0.0.1",
+  "description": "This is a cosmjs wallet kit",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://x.com/wiselyLee1",
+  "repository": {
+    "url": "https://github.com/wiselyG/cosmjs-wallet-kit"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup"
+  },
+  "keywords": [
+    "cosmos chain",
+    "cosmjs",
+    "juno",
+    "osmo"
+  ],
+  "author": "wisely",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@cosmjs/stargate": "^0.32.2",
+    "cosmjs-types": "^0.9.0"
+  }
+}

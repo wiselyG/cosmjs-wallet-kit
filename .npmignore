@@ -1,0 +1,9 @@
+/src
+/node_modules
+
+.env
+.DS_store
+
+tsconfig.json
+tsup.config.*
+*.code-workspace
