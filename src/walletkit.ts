@@ -98,11 +98,12 @@ class Cosmwalletkit{
       },
       })
     }
-
-    const result = await client.signAndBroadcast(accounts[0].address,sendmsg,gasPrice);
-
-    if( result.code !== 0){
-      throw new Error(`transfer failed,Error:${result.code}`);
+    let result;
+    try {
+      result = await client.signAndBroadcast(accounts[0].address,sendmsg,gasPrice);
+    } catch (error:any) {
+      console.error(error.stack);
+      throw error;
     }
     return {code:0,hash:result.transactionHash,gasUsed:result.gasUsed,height:result.height};
 
