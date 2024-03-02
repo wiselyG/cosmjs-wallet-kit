@@ -37,7 +37,7 @@ class Cosmwalletkit{
     }
     let walletSinger;
     try {
-      walletSinger = await DirectSecp256k1HdWallet.fromMnemonic(this.m,{prefix:this.c,hdPaths:pathArray});
+      walletSinger = await DirectSecp256k1HdWallet.fromMnemonic(this.m,{"prefix":this.c,"hdPaths":pathArray});
       return walletSinger;
     } catch (error:any) {
       console.error(error.stack)
