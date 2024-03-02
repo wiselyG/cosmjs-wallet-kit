@@ -66,3 +66,7 @@ const hdPath = balances[0].index;
 const result = await cosmkit.batchFaucet(mainPath,receiver,value,customGas)
 console.log(result.code);
 ```
+
+**tips:**
+
+# 🌌🚀🚀🚀
