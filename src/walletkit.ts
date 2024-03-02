@@ -26,6 +26,19 @@ class Cosmwalletkit{
       return walletSinger;
   }
 
+  async getSignerByPathIndex(pathIndex:number[]):Promise<OfflineDirectSigner>{
+    if(pathIndex.length>79 || pathIndex.length<1){
+      throw new Error(`generate wallet amount overflow,${pathIndex.length}`);
+    }
+    let firstPath=makeCosmoshubPath(pathIndex[0]);
+    let pathArray=Array.of(firstPath);
+    for(let i=1;i<pathIndex.length;i++){
+      pathArray.push(makeCosmoshubPath(pathIndex[i]));
+    }
+    const walletSinger = await DirectSecp256k1HdWallet.fromMnemonic(this.m,{prefix:this.c,hdPaths:pathArray});
+    return walletSinger;
+  }
+
   async getAccountData(walletSinger:OfflineDirectSigner):Promise<readonly AccountData[]>{
     return walletSinger.getAccounts();
   }
@@ -58,8 +71,34 @@ class Cosmwalletkit{
     if(!this.rpc){
       throw new Error("chain rpc is not setup");
     }
+    if(receiver.length <1 || receiver.length>78){
+      throw new Error(`receiver amount is out of range:${receiver.length}`);
+    }
     const gasPrice = getGasPrice(this.c);
     console.log(gasPrice);
+    const clientsigning = await this.getSignerByPathIndex([mainPath,...receiver]);
+    const client:SigningStargateClient = await SigningStargateClient.connectWithSigner(this.rpc,clientsigning);
+    const accounts=await clientsigning.getAccounts();
+    console.log("total accounts:",accounts.length);
+    console.log("main account amount:",(await client.getBalance(accounts[0].address,gasPrice.amount[0].denom)).amount);
+    const sendmsg:any[]=[];
+    for(let i=1;i<accounts.length;i++){
+      sendmsg.push({
+      typeUrl:"/cosmos.bank.v1beta1.MsgSend",
+      value:{
+        fromAddress: accounts[0].address,
+        toAddress: accounts[i].address,
+        amount: [{denom:gasPrice.amount[0].denom,amount:value.toString()},],
+      },
+      })
+    }
+
+    const result = await client.signAndBroadcast(accounts[0].address,sendmsg,gasPrice);
+
+    if( result.code !== 0){
+      throw new Error(`transfer failed,Error:${result.code}`);
+    }
+    return {code:0,hash:result.transactionHash,gasUsed:result.gasUsed,height:result.height};
 
   }
 
