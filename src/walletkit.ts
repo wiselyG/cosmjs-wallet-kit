@@ -70,7 +70,7 @@ class Cosmwalletkit{
     return balanceArray;
   }
 
-  async batchFaucet(mainPath:number,receiver:number[],value:number){
+  async batchFaucet(mainPath:number,receiver:number[],value:number,customGas:number){
     if(value < 0){
       throw new Error("faucet value cant be negative");
     }
@@ -80,7 +80,7 @@ class Cosmwalletkit{
     if(receiver.length <1 || receiver.length>78){
       throw new Error(`receiver amount is out of range:${receiver.length}`);
     }
-    const gasPrice = getGasPrice(this.c);
+    const gasPrice = getGasPrice(this.c,customGas);
     console.log(gasPrice);
     const clientsigning = await this.getSignerByPathIndex([mainPath,...receiver]);
     const client:SigningStargateClient = await SigningStargateClient.connectWithSigner(this.rpc,clientsigning);
