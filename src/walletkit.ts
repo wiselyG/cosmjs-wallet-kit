@@ -35,8 +35,14 @@ class Cosmwalletkit{
     for(let i=1;i<pathIndex.length;i++){
       pathArray.push(makeCosmoshubPath(pathIndex[i]));
     }
-    const walletSinger = await DirectSecp256k1HdWallet.fromMnemonic(this.m,{prefix:this.c,hdPaths:pathArray});
-    return walletSinger;
+    let walletSinger;
+    try {
+      walletSinger = await DirectSecp256k1HdWallet.fromMnemonic(this.m,{prefix:this.c,hdPaths:pathArray});
+      return walletSinger;
+    } catch (error:any) {
+      console.error(error.stack)
+      throw error;
+    }
   }
 
   async getAccountData(walletSinger:OfflineDirectSigner):Promise<readonly AccountData[]>{
