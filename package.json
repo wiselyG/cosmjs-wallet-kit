@@ -1,13 +1,13 @@
 {
   "name": "@cosmcaptain/cosmjs-wallet-kit",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "This is a cosmjs wallet kit",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "homepage": "https://x.com/wiselyLee1",
   "repository": {
-    "type":"git",
+    "type": "git",
     "url": "git+https://github.com/wiselyG/cosmjs-wallet-kit.git"
   },
   "scripts": {
