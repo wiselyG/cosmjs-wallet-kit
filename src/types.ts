@@ -20,8 +20,11 @@ export function getGasPrice(chain:string,customGas?:number):{amount:any[],gas:st
   }else if(chain.toLowerCase() === "osmo"){
     gas_obj.amount[0].denom="uosmo";
     gas_obj.amount[0].amount="2000";
+  }else if(chain.toLowerCase() ==="axelar"){
+    gas_obj.amount[0].denom="uaxl";
+    gas_obj.amount[0].amount="700";
   }else{
-    throw new Error(`chain:${chain}not supported current`)
+    throw new Error(`chain:${chain} not supported current`)
   }
   if(customGas){
     gas_obj.amount[0].amount=customGas.toString();
