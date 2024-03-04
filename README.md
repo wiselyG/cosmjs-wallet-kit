@@ -67,6 +67,14 @@ const result = await cosmkit.batchFaucet(mainPath,receiver,value,customGas)
 console.log(result.code);
 ```
 
+- convert Coin to uCoin(x1000000)
+
+```
+import { touCoin } from  '@cosmcaptain/cosmjs-wallet-kit';
+const amount=touCoin(0.1);
+console.log("amount:",amount);
+```
+
 **tips:**
 
 # 🌌🚀🚀🚀
