@@ -81,7 +81,7 @@ class Cosmwalletkit{
       throw new Error(`receiver amount is out of range:${receiver.length}`);
     }
     const gasPrice = getGasPrice(this.c,customGas);
-    console.log(gasPrice);
+
     const clientsigning = await this.getSignerByPathIndex([mainPath,...receiver]);
     const client:SigningStargateClient = await SigningStargateClient.connectWithSigner(this.rpc,clientsigning);
     const accounts=await clientsigning.getAccounts();
@@ -121,4 +121,11 @@ const generateMnemonic=async (count?:wordscount):Promise<string> =>{
   return mnemonic;
 }
 
-export {Cosmwalletkit,generateMnemonic}
+const touCoin=(amount:number):number=>{
+  if(!(amount>0)){
+    throw new Error("amount must be positive number")
+  }
+  return amount*1000000;
+}
+
+export {Cosmwalletkit,generateMnemonic,touCoin}
