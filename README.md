@@ -1,6 +1,6 @@
 # cosmjs-wallet-kit
 
-This is a toolkit for batch generate cosmos/osmo/juno &etc wallets from a same mnemonic.
+This is a toolkit for batch generate cosmos/osmo/juno/axelar &etc wallets from a same mnemonic.
 Also with function of batch faucet other accounts from main account.
 
 ## Functions
@@ -19,7 +19,7 @@ const test1= async ()=>{
 
 ```
 import { Cosmwalletkit } from '@cosmcaptain/cosmjs-wallet-kit';
-//chain value can be "cosmos"/"osmo"/"juno"
+//chain value can be cosmos/osmo/juno/axelar
 //rpc is the endpoint to the chain
 let cosmkit = new Cosmwalletkit(mnemonic,chain,rpc)
 ```
