@@ -1,6 +1,6 @@
 {
   "name": "@cosmcaptain/cosmjs-wallet-kit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "This is a cosmjs wallet kit",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
