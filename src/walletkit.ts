@@ -136,7 +136,8 @@ const toeCoin=(amount:number):string=>{
   if(!(amount>0)){
     throw new Error("amount must be positive number")
   }
-  let value=BigInt(amount.toString())*1000000000000000000n;
+  let temp=amount*1000000;
+  let value=BigInt(temp.toString())*1000000000000n;
   return value.toString();
 }
 
