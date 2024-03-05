@@ -140,4 +140,4 @@ const toeCoin=(amount:number):string=>{
   return value.toString();
 }
 
-export {Cosmwalletkit,generateMnemonic,touCoin}
+export {Cosmwalletkit,generateMnemonic,touCoin,toeCoin}
