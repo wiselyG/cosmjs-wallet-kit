@@ -8,7 +8,7 @@
   "homepage": "https://x.com/wiselyLee1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wiselyG/cosmjs-wallet-kit.git"
+    "url": "https://github.com/wiselyG/cosmjs-wallet-kit.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
