@@ -70,7 +70,7 @@ class Cosmwalletkit{
     return balanceArray;
   }
 
-  async batchFaucet(mainPath:number,receiver:number[],value:number,customGas:number){
+  async batchFaucet(mainPath:number,receiver:number[],value:number,customGas:number,token?:string){
     if(value < 0){
       throw new Error("faucet value cant be negative");
     }
@@ -82,6 +82,10 @@ class Cosmwalletkit{
     }
     const gasPrice = getGasPrice(this.c,customGas);
 
+    let denomlab=gasPrice.amount[0].denom;
+    if(token){
+      denomlab=token;
+    }
     const clientsigning = await this.getSignerByPathIndex([mainPath,...receiver]);
     const client:SigningStargateClient = await SigningStargateClient.connectWithSigner(this.rpc,clientsigning);
     const accounts=await clientsigning.getAccounts();
@@ -94,7 +98,7 @@ class Cosmwalletkit{
       value:{
         fromAddress: accounts[0].address,
         toAddress: accounts[i].address,
-        amount: [{denom:gasPrice.amount[0].denom,amount:value.toString()},],
+        amount: [{denom:denomlab,amount:value.toString()},],
       },
       })
     }
@@ -126,6 +130,14 @@ const touCoin=(amount:number):number=>{
     throw new Error("amount must be positive number")
   }
   return amount*1000000;
+}
+
+const toeCoin=(amount:number):string=>{
+  if(!(amount>0)){
+    throw new Error("amount must be positive number")
+  }
+  let value=BigInt(amount.toString())*1000000000000000000n;
+  return value.toString();
 }
 
 export {Cosmwalletkit,generateMnemonic,touCoin}
